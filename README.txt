@@ -1,3 +1,5 @@
+!!!!!!!!!!!!!  USE O CODE CLOCKS !!!!!!!!!!!!!!!
+
 1. Crie a conta no http://www.github.com
 
 2. Faça o download do Git http://git-scm.com/downloads

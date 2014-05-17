@@ -15,19 +15,17 @@
 recomendo armazenar no disco local C		
 	cd c:/
 	
-	
 
 	3.3. Agora digite git clone “endereço do github”
-		(esse endereço se encontra no site do github e serve para reconhecer qual repositório você quer baixar no seu computador \/ \/ \/ )
+		(esse endereço se encontra no site do github e serve para reconhecer qual repositório você quer baixar no seu computador )
 
-	
 
 4. Depois de ter colocado o projeto no seu computador digite o comando git pull
 que serve para atualizar o seu repositório com o repositório principal (nuvem)
 
 IMPORTANTE: sempre que você for programar dê um git pull !!! Pois outros membros do projeto podem ter feito alguma alteração, e só vai esta no seu projeto se você atualizar !
 
-5. Depois de programar e ter feito todas as alterações você precisa enviar para a nuvem, para isso digite os comandos abaixo
+5. Depois de programar e ter feito todas as alterações que você precisa enviar para a nuvem, digite os comandos abaixo
 
 git pull				- (novamente) Atualiza seu repositório
 git add -–all			- Pegando todos os arquivos		
@@ -38,7 +36,9 @@ EXTREMAMENTE IMPORTANTE: sempre antes de programar dê git pull !!
 
 EXTREMAMENTE IMPORTANTE 2: sempre que for seguir o passado 5 dps de programar ou o passo 4 para atualizar não esqueça de navegar até o projeto no git bash
 
-SUPER EXTREMAMENTE MEGA HIPER IMPORTANTE 3 !!!: Keep calm and … good programming programatation 
+EXTREMAMENTE IMPORTANTE 3: Depois de fazer o git clone pela primeira vez siga os passos 4 e 5 sempre !
+
+SUPER EXTREMAMENTE MEGA HIPER IMPORTANTE 4 !!!: Keep calm and … good programming programatation 
 
 DUVIDA ME AVISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

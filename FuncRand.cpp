@@ -1,39 +1,76 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 
 #define lin 13
 #define col 13
 
 using namespace std;
 
-class Gera
+void geraMatriz(int matriz[lin][col])
 {
-    public:
-    int op;
-    void geraMatriz(int op);
-};
-
-void Gera::geraMatriz(int op)
-{
-    int matriz[lin][col];
-
     for(int i=0;i<lin;i++)
     {
         for(int j=0;j<col;j++)
         {
-            matriz[lin][col]=rand()%3;
+            matriz[i][j]=rand()%7;
         }
     }
+}
 
+int verificaMatrizLinha(int matriz[lin][col])
+{
+    int cont=0;
+
+    for(int i=0;i<lin;i++)
+    {
+        for(int j=0;j<col-2;j++)
+        {
+            if(matriz[i][j]==matriz[i][j+1] && matriz[i][j]==matriz[i][j+2])
+            {
+                cont+=1;
+            }
+        }
+    }
+    return cont;
+}
+
+int verificaMatrizColuna(int matriz[lin][col])
+{
+    int cont=0;
+
+    for(int i=0;i<lin-2;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            if(matriz[i][j]==matriz[i+1][j] && matriz[i][j]==matriz[i+2][j])
+            {
+                cont+=1;
+            }
+        }
+    }
+    return cont;
+}
+
+void exibeMatriz(int matriz[lin][col])
+{
+    for(int i=0;i<lin;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            cout<<matriz[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
 }
 
 int main()
 {
-
-    void textbackground (int green);
+srand(time(NULL));
 
     int op;
-    Gera gera;
+    int matriz[lin][col];
+
     cout<<"-=-=-=-=-=-=-=-=-=-=-=-"<<endl;
     cout<<"--     Inicio [1]    --"<<endl;
     cout<<"-=-=-=-=-=-=-=-=-=-=-=-\n"<<endl;
@@ -42,10 +79,14 @@ int main()
 
     if(op==1)
     {
-        gera.geraMatriz(op);
+        do
+        {
+            geraMatriz(matriz);
+            cout<<"...Loading..."<<"\n"<<endl;
+            system("cls");
+        }while(verificaMatrizLinha(matriz)!=0 || verificaMatrizColuna(matriz)!=0);
+
+        exibeMatriz(matriz);
     }
-
-
-
     return 0;
 }

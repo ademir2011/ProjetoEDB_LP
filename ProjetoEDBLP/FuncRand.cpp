@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+//#include <SDL.h>
 
-#define lin 13
-#define col 13
+#define lin 8
+#define col 8
 
 using namespace std;
 
@@ -13,7 +14,7 @@ void geraMatriz(int matriz[lin][col])
     {
         for(int j=0;j<col;j++)
         {
-            matriz[i][j]=rand()%7;
+            matriz[i][j]=rand()%5;
         }
     }
 }

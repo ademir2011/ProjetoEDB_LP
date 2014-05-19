@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1400515583 source:c:\projetoedb_lp\projetoedblp\funcrand.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-//#include <SDL.h>
+#include <SDL/SDL.h>
+#include <string>
 
 #define lin 8
 #define col 8
@@ -65,7 +66,7 @@ void exibeMatriz(int matriz[lin][col])
     }
 }
 
-int main()
+int main(int argc, char* args[])
 {
 srand(time(NULL));
 
@@ -89,5 +90,35 @@ srand(time(NULL));
 
         exibeMatriz(matriz);
     }
+
+    //The images
+    SDL_Surface* hello = NULL;
+    SDL_Surface* screen = NULL;
+
+    //Start SDL
+    SDL_Init( SDL_INIT_EVERYTHING );
+
+    //Set up screen
+    screen = SDL_SetVideoMode( 260, 182, 32, SDL_SWSURFACE );
+
+    //Load image
+    hello = SDL_LoadBMP( "22222d2d2d2d2.bmp" );
+
+      //Apply image to screen
+    SDL_BlitSurface( hello, NULL, screen, NULL );
+
+    //Update Screen
+    SDL_Flip( screen );
+
+    //Pause
+    SDL_Delay( 20000 );
+
+    //Free the loaded image
+    SDL_FreeSurface( hello );
+
+    //Quit SDL
+    SDL_Quit();
+
+    system("pause");
     return 0;
 }

@@ -49,21 +49,13 @@ void exibeMatriz(int matriz[lin][col])
     }
 }
 
-void troca(int matriz[lin][col], int *x1, int *y1, int *x2, int *y2)
+void troca(int matriz[lin][col], int x1, int y1, int x2, int y2)
 {
-    int auxX, auxY, auxM;
+    int auxM;
 
-        auxX = *x1;
-        *x1  = *x2;
-        *x2  = auxX;
-
-        auxY = *y1;
-        *y1  = *y2;
-        *y2  = auxY;
-
-        auxM=matriz[*x1][*y1];
-        matriz[*x1][*y1]=matriz[*x2][*y2];
-        matriz[*x2][*y2]=auxM;
+        auxM=matriz[x1][y1];
+        matriz[x1][y1]=matriz[x2][y2];
+        matriz[x2][y2]=auxM;
 }
 
 int restricao(int *chave, int x1, int y1, int x2, int y2)
@@ -107,15 +99,11 @@ int main()
     cout<<"y2:";
     cin>>y2;
 
-    cout<<"\n\nx1:"<<x1<<" y1:"<<y1<<" x2:"<<x2<<" y2:"<<y2<<endl;
-
     restricao(&chave,x1,y1,x2,y2);
     if(chave==1)
     {
-        troca(matriz, &x1, &y1, &x2, &y2);
+        troca(matriz, x1, y1, x2, y2);
     }
-
-    cout<<"x1:"<<x1<<" y1:"<<y1<<" x2:"<<x2<<" y2:"<<y2;
 
     }while(ks==1);
 

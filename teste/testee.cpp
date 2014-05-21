@@ -1,23 +1,28 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <SDL/SDL.h>
-#include <string>
+//#include <SDL/SDL.h>
 
-#define lin 8
-#define col 8
+#define lin 10
+#define col 10
 
 using namespace std;
 
-void geraMatriz(int matriz[lin][col])
+int verificaMatrizColuna(int matriz[lin][col])
 {
-    for(int i=0;i<lin;i++)
+    int cont=0;
+
+    for(int i=0;i<lin-2;i++)
     {
         for(int j=0;j<col;j++)
         {
-            matriz[i][j]=rand()%5;
+            if(matriz[i][j]==matriz[i+1][j] && matriz[i][j]==matriz[i+2][j])
+            {
+                cont+=1;
+            }
         }
     }
+    return cont;
 }
 
 int verificaMatrizLinha(int matriz[lin][col])
@@ -37,21 +42,19 @@ int verificaMatrizLinha(int matriz[lin][col])
     return cont;
 }
 
-int verificaMatrizColuna(int matriz[lin][col])
+void geraMatriz(int matriz[lin][col])
 {
-    int cont=0;
-
-    for(int i=0;i<lin-2;i++)
+    for(int i=0;i<lin;i++)
     {
         for(int j=0;j<col;j++)
         {
-            if(matriz[i][j]==matriz[i+1][j] && matriz[i][j]==matriz[i+2][j])
-            {
-                cont+=1;
-            }
+                do
+                {
+                    matriz[i][j]=rand()%3;
+                }while((matriz[i][j]==matriz[i][j-1] && matriz[i][j]==matriz[i][j-2]) ||
+                       (matriz[i][j]==matriz[i-1][j] && matriz[i][j]==matriz[i-2][j]));
         }
     }
-    return cont;
 }
 
 void exibeMatriz(int matriz[lin][col])
@@ -65,6 +68,8 @@ void exibeMatriz(int matriz[lin][col])
         cout<<"\n";
     }
 }
+
+
 
 int main(int argc, char* args[])
 {
@@ -81,16 +86,11 @@ srand(time(NULL));
 
     if(op==1)
     {
-        do
-        {
-            geraMatriz(matriz);
-            cout<<"...Loading..."<<"\n"<<endl;
-            system("cls");
-        }while(verificaMatrizLinha(matriz)!=0 || verificaMatrizColuna(matriz)!=0);
-
-        exibeMatriz(matriz);
+       geraMatriz(matriz);
+       exibeMatriz(matriz);
+       cout<<"\n\n-----\n"<<verificaMatrizLinha(matriz)<<"\n-----\n\n";
+       cout<<"\n\n-----\n"<<verificaMatrizColuna(matriz)<<"\n-----\n\n";
     }
 
-    system("pause");
     return 0;
 }

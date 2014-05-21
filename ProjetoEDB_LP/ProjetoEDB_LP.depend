@@ -1,8 +1,7 @@
 # depslib dependency file v1.0
-1385316856 source:c:\projetoedb_lp\projetoedb_lp\main.cpp
-	<cstdlib>
-	<stdlib.h>
+1400555302 source:c:\projetoedb_lp\projetoedb_lp\main.cpp
 	<SDL/SDL.h>
+	<stdlib.h>
 
 1325738640 c:\sdl-1.2.15\include\sdl\sdl.h
 	"SDL_main.h"
@@ -194,7 +193,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1400521548 source:c:\projetoedb_lp\projetoedb_lp\funcrand.cpp
+1400523306 source:c:\projetoedb_lp\projetoedb_lp\funcrand.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>

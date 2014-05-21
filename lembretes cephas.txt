@@ -1,0 +1,17 @@
+Ao formar fila com 4 é criado um bonus power da cor usada
+
+bonus power estoura 3x3 ao redor
+
+
+L com 6 também cria bonus power
+
+
+fila com 5 cria especial que estoura todos os da cor que ele trocou(candy crush)
+
+Branco
+Laranja
+Amarelo
+Azul
+Vermelho
+Verde
+Roxo

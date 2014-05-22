@@ -1,0 +1,17 @@
+se (linha > 0 e linha < lin e coluna > 0 e coluna < n)
+	normal
+senao se (linha == 0)
+		coluna == 0
+		coluna == n
+	
+senao se(linha == n)
+		coluna == 0
+		coluna == n
+
+
+
+
+x	x	x	x
+x	x	x	x
+x	x	x	x
+x	x	x	x

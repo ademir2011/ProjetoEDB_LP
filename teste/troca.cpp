@@ -49,37 +49,65 @@ void exibeMatriz(int matriz[lin][col])
     }
 }
 
-void troca(int matriz[lin][col], int x1, int y1, int x2, int y2)
+void trocaIDA(int matriz[lin][col], int x1, int y1, int x2, int y2)
 {
     int auxM;
+
+    auxM=matriz[x1][y1];
+    matriz[x1][y1]=matriz[x2][y2];
+    matriz[x2][y2]=auxM;
+}
+
+int compara(int matriz[lin][col], int *chave, int x1, int y1, int x2, int y2)
+{
+    if( (x1==x2 && (y1==y2-1 || y1==y2+1)  || (y1==y2 && (x1==x2-1 || x1==x2+1)))   &&
+            (
+               ((matriz[x1][y1]==matriz[x1][y1-1] && matriz[x1][y1]==matriz[x1][y1-2])      ||
+                (matriz[x1][y1]==matriz[x1][y1+1] && matriz[x1][y1]==matriz[x1][y1+2])      ||
+                (matriz[x1][y1]==matriz[x1+1][y1] && matriz[x1][y1]==matriz[x1+2][y1])      ||
+                (matriz[x1][y1]==matriz[x1-1][y1] && matriz[x1][y1]==matriz[x1-2][y1])      ||
+                (matriz[x1][y1]==matriz[x1+1][y1] && matriz[x1][y1]==matriz[x1-1][y1])      ||
+                (matriz[x1][y1]==matriz[x1][y1+1] && matriz[x1][y1]==matriz[x1][y1-1]))
+                                                  ||
+               ((matriz[x2][y2]==matriz[x2][y2-1] && matriz[x2][y2]==matriz[x2][y2-2])      ||
+                (matriz[x2][y2]==matriz[x2][y2+1] && matriz[x2][y2]==matriz[x2][y2+2])      ||
+                (matriz[x2][y2]==matriz[x2+1][y2] && matriz[x2][y2]==matriz[x2+2][y2])      ||
+                (matriz[x2][y2]==matriz[x2-1][y2] && matriz[x2][y2]==matriz[x2-2][y2])      ||
+                (matriz[x2][y2]==matriz[x2+1][y2] && matriz[x2][y2]==matriz[x2-1][y2])      ||
+                (matriz[x2][y2]==matriz[x2][y2+1] && matriz[x2][y2]==matriz[x2][y2-1]))
+            )
+        )
+    {
+        cout<<"Trocou !!!";
+    }
+
+    else
+    {
+        cout<<"Nao trocou !!!";
+        *chave=1;
+    }
+}
+
+void trocaVOLTA(int matriz[lin][col], int *chave, int x1, int y1, int x2, int y2)
+{
+    if(*chave==1)
+    {
+        int auxM;
 
         auxM=matriz[x1][y1];
         matriz[x1][y1]=matriz[x2][y2];
         matriz[x2][y2]=auxM;
-}
-
-int restricao(int *chave, int x1, int y1, int x2, int y2)
-{
-    if(((x1==x2-1 || x1==x2+1 || x1==x2)   &&
-        (y1==y2-1 || y1==y2+1 || y1==y2))  &&
-        (x1!=y1 || x2!=y2)
-       )
-    {
-        *chave=1;
-    }
-    else
-    {
-        cout<<"Erro na chave !";
     }
 }
 
 int main()
 {
     int ks = 1;
-    int matriz[lin][col],chave;
+    int matriz[lin][col],chave=0;
 
-    geraMatriz(matriz);
+
     srand(time(NULL));
+    geraMatriz(matriz);
 
     int x1, y1;
     int x2, y2;
@@ -99,11 +127,11 @@ int main()
     cout<<"y2:";
     cin>>y2;
 
-    restricao(&chave,x1,y1,x2,y2);
-    if(chave==1)
-    {
-        troca(matriz, x1, y1, x2, y2);
-    }
+    trocaIDA(matriz, x1, y1, x2, y2);
+    compara(matriz, &chave, x1, y1, x2, y2);
+    trocaVOLTA(matriz, &chave, x1, y1, x2, y2);
+
+    chave=0;
 
     }while(ks==1);
 

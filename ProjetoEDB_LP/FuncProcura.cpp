@@ -7,7 +7,8 @@ using namespace std;
 
 void FuncProcura(int matriz[lin][col]){
     int c1, c2, c3, c4, c5;                 //contadores para colunas
-    int repetidos;                          //quantidade de repetidos
+    int repetidos;
+    int coord_linha, coord_coluna;                          //quantidade de repetidos
     int l = 0;                              //contador para linha
 
     // ---------- iniciar verificação de elementos repetidos
@@ -31,9 +32,10 @@ void FuncProcura(int matriz[lin][col]){
                         break;
                         }
                     repetidos = 3;
-
-
-                    break;
+                    tipo = 1;                                                           //3 repetidos em linha
+                    coord_linha = l;                                                    //linha do elemento base
+                    coord_coluna = c1;                                                  //coluna do elemento base
+                    break;                                                              //será excluido com a implementacao do return
                     }
                 /*repetidos = 2;
                 cout << "funcao com " << repetidos << " elementos repetidos a partir de " << c1 << "\n";

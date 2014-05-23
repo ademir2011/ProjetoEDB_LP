@@ -31,7 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="compara.cpp" />
+		<Unit filename="geraMatriz.cpp" />
 		<Unit filename="troca.cpp" />
+		<Unit filename="trocaIDA.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="trocaVOLTA.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

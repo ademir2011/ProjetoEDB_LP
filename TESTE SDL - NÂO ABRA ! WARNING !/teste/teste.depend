@@ -1,9 +1,19 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 200259960 <<<<< HEAD
 
 1401271197 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
 	<SDL.h>
 	<stdio.h>
+=======
+3871304 ÿÿÿÿ
+
+1401262908 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+>>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
 
 1400879611 e241f499bcbeb7a6af3b1ae82a8b2269b91f3
 	<SDL.h>

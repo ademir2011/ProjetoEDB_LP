@@ -1,3 +1,8 @@
+#include <iostream>
+
+#define lin 10
+#define col 10
+
 //Essa função será chamada quando houver uma troca com o tipo bonus.
 //Esse tipo retira da matriz uma área de 3x3 ao redor do elemento especial(bonus)
 //na sua nova posição.
@@ -5,7 +10,8 @@
 //
 
 
-void bonus(int matriz[][], int lin, int col, int linha, int coluna)
+
+void bonus(int matriz[lin][col], int linha, int coluna)
 {        //funções bonus para cada tipo de localização na matriz
     int i, j;
 

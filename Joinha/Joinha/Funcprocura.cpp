@@ -1,3 +1,8 @@
+#include <iostream>
+
+#define lin 10
+#define col 10
+
 //Essa função retorna um caso ache algum tipo de sequencia com repetições na matriz
 //e também altera os valores referenciados pelo main para retornar um
 //tamanho               - quantidades de itens repetidos na sequencia
@@ -5,7 +10,8 @@
 //coordenada linha      - a coordenada da linha do elemento base
 //coordenada coluna     - a coordenada da coluna do elemento base
 
-int FuncProcura(int matriz[][],int lin, int col, int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
+
+int FuncProcura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
     int c1, c2, c3, c4, c5;                 //contadores para colunas
     int l = 0;                              //contador para linha
 

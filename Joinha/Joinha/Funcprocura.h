@@ -1,6 +1,9 @@
 #ifndef FUNCPROCURA_H_INCLUDED
 #define FUNCPROCURA_H_INCLUDED
 
+#define lin 10
+#define col 10
+
 //Essa função retorna um caso ache algum tipo de sequencia com repetições na matriz
 //e também altera os valores referenciados pelo main para retornar um
 //tamanho               - quantidades de itens repetidos na sequencia

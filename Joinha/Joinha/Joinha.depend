@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1401248551 source:c:\projetoedb_lp\joinha\joinha\funcbonus.cpp
+	<iostream>
+
+1401248524 source:c:\projetoedb_lp\joinha\joinha\funcexibe_matriz.cpp
+	<iostream>
+
+1401250202 source:c:\projetoedb_lp\joinha\joinha\funcgera_matriz.cpp
+	<iostream>
+	<cstdlib>
+
+1401248645 source:c:\projetoedb_lp\joinha\joinha\funcprocura.cpp
+	<iostream>
+
+1401249864 source:c:\projetoedb_lp\joinha\joinha\main.cpp
+	<iostream>
+	"FuncGera_matriz.h"
+	"FuncExibe_matriz.h"
+	"Funcprocura.h"
+
+1401250222 c:\projetoedb_lp\joinha\joinha\funcgera_matriz.h
+
+1401248200 c:\projetoedb_lp\joinha\joinha\funcexibe_matriz.h
+
+1401248289 c:\projetoedb_lp\joinha\joinha\funcprocura.h
+

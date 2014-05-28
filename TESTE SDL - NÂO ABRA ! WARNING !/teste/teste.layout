@@ -3,7 +3,15 @@
 	<ActiveTarget name="Debug" />
 	<File name="17_mouse_events.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
+<<<<<<< HEAD
 			<Cursor1 position="247" topLine="0" />
+=======
+<<<<<<< HEAD
+			<Cursor1 position="4066" topLine="175" />
+=======
+			<Cursor1 position="10148" topLine="477" />
+>>>>>>> 37de241f499bcbeb7a6af3b1ae82a8b2269b91f3
+>>>>>>> 8800d5829411e8100e9ae903e18bb4319e34486d
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

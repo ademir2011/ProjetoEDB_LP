@@ -1,11 +1,11 @@
-#include <iostream>
-#include <cstdlib>
-using namespace std;
+//Essa função retorna um caso ache algum tipo de sequencia com repetições na matriz
+//e também altera os valores referenciados pelo main para retornar um
+//tamanho               - quantidades de itens repetidos na sequencia
+//tipo                  - subtipo que determina qual estrutura será tratada
+//coordenada linha      - a coordenada da linha do elemento base
+//coordenada coluna     - a coordenada da coluna do elemento base
 
-#define lin 5
-#define col 5
-
-int FuncProcura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
+int FuncProcura(int matriz[][],int lin, int col, int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
     int c1, c2, c3, c4, c5;                 //contadores para colunas
     int l = 0;                              //contador para linha
 
@@ -176,49 +176,3 @@ int FuncProcura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linh
 }
 return 0;
 }
-
-void geraMatriz(int matriz[lin][col]){
-    for(int i=0;i<lin;i++){
-        for(int j=0;j<col;j++){
-            //matriz[i][j]=rand()%5;
-            matriz[i][j]= j;
-        }
-    }
-}
-
-void exibeMatriz(int matriz[lin][col]){
-        for(int i=0;i<lin;i++)
-    {
-        for(int j=0;j<col;j++)
-        {
-            cout<<matriz[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
-    cout<<"\n";
-}
-
-int main(){
-
-//int mat[lin][col];
-int c1, c2;
-int x = 5, y = 5;
-int mat[lin][col] ={{8,9,3,9,8},
-                    {1,2,3,4,5},
-                    {3,3,3,6,2},
-                    {4,1,4,7,9},
-                    {1,2,0,4,5}};
-exibeMatriz(mat);
-int repetido, tipo, linha, coluna;
-FuncProcura(mat, &repetido, &tipo, &linha, &coluna);
-
-
-cout << "repetido = " << repetido << "\n";
-cout << "tipo = " << tipo << "\n";
-cout << "linha = " << linha << "\n";
-cout << "coluna = " << coluna << "\n";
-
-return 0;
-}
-
-

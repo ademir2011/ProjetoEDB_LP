@@ -6,8 +6,10 @@
 
 #define lin 7
 #define col 7
-#define moveLin 70
-#define moveCol 70
+#define moveLin 66
+#define moveCol 65
+
+int matriz[lin][col];
 
 using std::cout;
 using std::cin;
@@ -30,7 +32,7 @@ void carregaImagens()
             surface = SDL_GetWindowSurface(window);
 
             //Carrega a imagem em imd
-            TelaInicial = IMG_Load("imagens/P2.jpg");
+            TelaInicial = SDL_LoadBMP("imagens/planops.bmp");
 
             //Carregando jóia 1
             JoiaAzul = IMG_Load("imagens/Azul1.png");
@@ -77,11 +79,9 @@ void carregaVideo()
 
 void geraMatriz()
 {
-    int matriz[lin][col];
-
         /* desenhar a Matriz */
         SDL_Rect destino;
-        int linha, coluna, espSup = 100, espEsq = 300;
+        int linha, coluna, espSup = 75, espEsq = 285;
 
         for (linha = 0; linha < 7; linha++)
         {
@@ -89,6 +89,7 @@ void geraMatriz()
                 for (coluna = 0; coluna < 7; coluna++)
                 {
                     destino.x = espEsq + (coluna * moveCol);
+
                     if(matriz[linha][coluna]==0)
                     {
                         SDL_BlitSurface(JoiaBranca, NULL, surface, &destino);
@@ -112,7 +113,6 @@ void geraMatriz()
 
 void geraValoresMatriz()
 {
-    int matriz[lin][col];
     for(int i=0;i<lin;i++)
         {
             for(int j=0;j<col;j++)

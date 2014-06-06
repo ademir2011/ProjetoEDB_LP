@@ -1,12 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
-#define lin 10
-#define col 10
+#include "Matriz.h"
 
 
-void FuncBonus(int matriz[lin][col], int linha, int coluna){        //funções bonus para cada tipo de localização na matriz
+
+
+void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){        //funções bonus para cada tipo de localização na matriz
 
     int i, j;
 
@@ -117,9 +117,10 @@ void FuncBonus(int matriz[lin][col], int linha, int coluna){        //funções bo
             }
 
     }
+    return Matriz;
 }
-
-void FuncExibe_matriz(int matriz[lin][col]){
+/*
+void Matriz::FuncExibe_matriz(int matriz[lin][col]){
 
 for(int i=0;i<lin;i++)
     {
@@ -131,7 +132,7 @@ for(int i=0;i<lin;i++)
     }
 }
 
-int Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
+int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
     int c1, c2, c3, c4, c5;                 //contadores para colunas
     int l = 0;                              //contador para linha
 
@@ -301,7 +302,7 @@ int Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_lin
 return 0;
 }
 
-void Func_Geramatriz(int matriz[lin][col]){
+void Matriz::Func_Geramatriz(int matriz[lin][col]){
     for(int i=0;i<lin;i++)
     {
         for(int j=0;j<col;j++)
@@ -315,7 +316,7 @@ void Func_Geramatriz(int matriz[lin][col]){
     }
 }
 
-void Func_Compara(int matriz[lin][col], int l1, int c1, int l2, int c2, int *esp_4_l, int *esp_4_c){
+void Matriz::Func_Compara(int matriz[lin][col], int l1, int c1, int l2, int c2, int *esp_4_l, int *esp_4_c){
     if( (l1==l2 && (c1==c2-1 || c1==c2+1)  || (c1==c2 && (l1==l2-1 || l1==l2+1)))   &&
             (
                ((matriz[l1][c1]==matriz[l1][c1-1] && matriz[l1][c1]==matriz[l1][c1-2])      ||
@@ -363,7 +364,7 @@ void Func_Compara(int matriz[lin][col], int l1, int c1, int l2, int c2, int *esp
     }
 }
 
-void Func_Troca(int matriz[lin][col], int l1, int c1, int l2, int c2){
+void Matriz::Func_Troca(int matriz[lin][col], int l1, int c1, int l2, int c2){
     int aux;
 
     aux=matriz[l1][c1];
@@ -389,7 +390,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                   }
                                   else
                                   {
-                                        matriz[i][j]= rand()%3;
+                                        matriz[i][j]= 400;//400;
                                   }
                             }
                     }
@@ -405,7 +406,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                               }
                               else
                               {
-                                    matriz[i][j]= rand()%3;
+                                    matriz[i][j]= 400;
                               }
                         }
                  }break;
@@ -425,7 +426,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                       }
                                       else
                                       {
-                                            matriz[i][j]= rand()%3;
+                                            matriz[i][j]= 400;
                                       }
                                 }
                         }
@@ -441,7 +442,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                               }
                               else
                               {
-                                    matriz[i][j]= rand()%3;
+                                    matriz[i][j]= 400;
                               }
                         }
                   }break;
@@ -462,7 +463,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                                 }
                                                 else
                                                 {
-                                                      matriz[i][j]== rand()%3;
+                                                      matriz[i][j]== 400;
                                                 }
                                         }
                               }
@@ -477,7 +478,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                               }
                                               else
                                               {
-                                                    matriz[i][j]== rand()%3;
+                                                    matriz[i][j]== 400;
                                               }
                                       }
                               }break;
@@ -491,7 +492,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                          }
                                          else
                                          {
-                                               matriz[i][j]= rand()%3;
+                                               matriz[i][j]= 400;
                                          }
                               }
                               for(int i = (l + 1),j = c;i >= 0;i--)
@@ -502,11 +503,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                          }
                                          else
                                          {
-                                               matriz[i][j]= rand()%3;
+                                               matriz[i][j]= 400;
                                          }
                               }break;
 
-                        /* case 3:
+                         case 3:
                              //coluna
                              for(int i = (l - 1),j = c;i >= 0;i--)
                              {
@@ -516,7 +517,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                    }
                                    else
                                    {
-                                         matriz[i][j]= rand()%3;
+                                         matriz[i][j]= 400;
                                    }
                              }
                              //linha direita
@@ -530,7 +531,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -545,7 +546,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                    }
                                    else
                                    {
-                                         matriz[i][j]= rand()%3;
+                                         matriz[i][j]= 400;
                                    }
                              }
                              //linha esquerda
@@ -559,7 +560,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -574,7 +575,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                    }
                                    else
                                    {
-                                         matriz[i][j]= rand()%3;
+                                         matriz[i][j]= 400;
                                    }
                              }
                              //linha direita
@@ -588,7 +589,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -603,7 +604,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                    }
                                    else
                                    {
-                                         matriz[i][j]= rand()%3;
+                                         matriz[i][j]= 400;
                                    }
                              }
                              //linha esquerda
@@ -617,7 +618,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -632,7 +633,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -646,7 +647,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }
@@ -661,7 +662,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -676,7 +677,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -690,7 +691,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }
@@ -705,7 +706,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -720,7 +721,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              for(int i = l,j = c;i >= 0;i--)
@@ -731,7 +732,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha direita
@@ -745,7 +746,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -759,7 +760,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              for(int i = l,j = c;i >= 0;i--)
@@ -770,7 +771,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -784,7 +785,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -804,7 +805,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -818,7 +819,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }
@@ -833,7 +834,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -848,7 +849,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -862,7 +863,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }
@@ -877,7 +878,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -892,7 +893,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              for(int i = (l + 1),j = c;i >= 0;i--)
@@ -903,7 +904,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha direita
@@ -917,7 +918,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
                              }break;
@@ -932,7 +933,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              for(int i = (l + 1),j = c;i >= 0;i--)
@@ -943,7 +944,7 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      }
                                      else
                                      {
-                                           matriz[i][j]= rand()%3;
+                                           matriz[i][j]= 400;
                                      }
                              }
                              //linha esquerda
@@ -957,48 +958,13 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== rand()%3;
+                                                   matriz[i][j]== 400;
                                              }
                                      }
-                             }break;*/
+                             }break;
 
                  }break;
 
     }
 
-}
-
-
-
-int main(){
-int matriz[lin][col];
-int i, j, cont;
-int l_4, c_4;
-int repetidos, tipo, l_base, c_base;
-
-Func_Geramatriz(matriz);
-FuncExibe_matriz(matriz);
-
-int l1, c1, l2, c2;
-
-for(cont = 0; cont < 300; cont++){
-std::cout << "digite as coordenadas de linha e coluna para troca\n";
-std::cin >> l1 >> c1 >> l2 >> c2;
-
-Func_Troca(matriz,l1,c1,l2,c2);
-Func_Compara(matriz,l1,c1,l2,c2,&l_4,&c_4);
-FuncExibe_matriz(matriz);
-Func_Procura(matriz, &repetidos, &tipo, &l_base,&c_base);
-
-std::cout << "\n\nElementos repetidos: " << repetidos << "\n";
-std::cout << "tipo: " << tipo << "\n";
-std::cout << "Coordenada l base: " << l_base << "\n";
-std::cout << "Coordenada c base: " << c_base << "\n\n";
-
-Func_Desloca(matriz,repetidos, tipo, l_base, c_base);
-
-FuncExibe_matriz(matriz);
-}
-
-return 0;
 }

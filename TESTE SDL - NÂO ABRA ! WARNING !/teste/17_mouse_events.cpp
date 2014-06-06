@@ -1,629 +1,172 @@
-<<<<<<< HEAD
-/*This source code copyrighted by Lazy Foo' Productions (2004-2013)
-=======
-/*This source code copyrighted by Lazy Foo' Productions (2004-2014)
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-and may not be redistributed without written permission.*/
-
-//Using SDL, SDL_image, standard IO, and strings
-/*#include <SDL.h>
+#include <iostream>
+#include <SDL.h>
 #include <SDL_image.h>
-#include <stdio.h>
-#include <string>*/
+#include <cstdlib>
+#include <ctime>
 
+#define lin 7
+#define col 7
+#define moveLin 70
+#define moveCol 70
 
-<<<<<<< HEAD
-#include <SDL.h> //usaremos funcoes da SDL
-#include <SDL_image.h>
-=======
-<<<<<<< HEAD
-//Starts up SDL and creates window
-bool init();
+using namespace std;
 
-//Loads media
-bool loadMedia();
+    SDL_Window *window = NULL;
+    SDL_Surface *surface = NULL;
+    SDL_Event Event;
+    SDL_Surface *TelaInicial = NULL;
+    SDL_Surface *TelaSec = NULL;
+    SDL_Surface *JoiaAzul = NULL;
+    SDL_Surface *JoiaBranca = NULL;
+    SDL_Surface *JoiaVerde = NULL;
+    SDL_Surface *JoiaLaranja = NULL;
+    SDL_Surface *matrizTeste = NULL;
 
-//Frees media and shuts down SDL
-void close();
-
-//Loads individual image as texture
-SDL_Texture* loadTexture( std::string path );
-
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The window renderer
-SDL_Renderer* gRenderer = NULL;
-
-//Current displayed texture
-SDL_Texture* gTexture = NULL;
-
-bool init()
+void carregaImagens()
 {
-=======
-//Button constants
-const int BUTTON_WIDTH = 300;
-const int BUTTON_HEIGHT = 200;
-const int TOTAL_BUTTONS = 4;
+            //Passa a janela para dentro da surface
+            surface = SDL_GetWindowSurface(window);
 
-enum LButtonSprite
-{
-	BUTTON_SPRITE_MOUSE_OUT = 0,
-	BUTTON_SPRITE_MOUSE_OVER_MOTION = 1,
-	BUTTON_SPRITE_MOUSE_DOWN = 2,
-	BUTTON_SPRITE_MOUSE_UP = 3,
-	BUTTON_SPRITE_TOTAL = 4
-};
+            //Carrega a imagem em imd
+            TelaInicial = SDL_LoadBMP("Plano2.bmp");
 
-//Texture wrapper class
-class LTexture
-{
-	public:
-		//Initializes variables
-		LTexture();
+            //Carregando jóia 1
+            JoiaAzul = IMG_Load("Azul1.png");
 
-		//Deallocates memory
-		~LTexture();
+            //Carregando jóia 2
+            JoiaBranca = IMG_Load("Branco.png");
 
-		//Loads image at specified path
-		bool loadFromFile( std::string path );
+            //Carregando jóia 1
+            JoiaVerde = IMG_Load("Verde.png");
 
-		#ifdef _SDL_TTF_H
-		//Creates image from font string
-		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
-		#endif
+            //Carregando jóia 2
+            JoiaLaranja = IMG_Load("Laranja.png");
 
-		//Deallocates texture
-		void free();
-
-		//Set color modulation
-		void setColor( Uint8 red, Uint8 green, Uint8 blue );
-
-		//Set blending
-		void setBlendMode( SDL_BlendMode blending );
-
-		//Set alpha modulation
-		void setAlpha( Uint8 alpha );
-
-		//Renders texture at given point
-		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
-
-		//Gets image dimensions
-		int getWidth();
-		int getHeight();
-
-	private:
-		//The actual hardware texture
-		SDL_Texture* mTexture;
-
-		//Image dimensions
-		int mWidth;
-		int mHeight;
-};
-
-//The mouse button
-class LButton
-{
-	public:
-		//Initializes internal variables
-		LButton();
-
-		//Sets top left position
-		void setPosition( int x, int y );
-
-		//Handles mouse event
-		void handleEvent( SDL_Event* e );
-
-		//Shows button sprite
-		void render();
-
-	private:
-		//Top left position
-		SDL_Point mPosition;
-
-		//Currently used global sprite
-		LButtonSprite mCurrentSprite;
-};
-
-//Starts up SDL and creates window
-bool init();
-
-//Loads media
-bool loadMedia();
-
-//Frees media and shuts down SDL
-void close();
-
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The window renderer
-SDL_Renderer* gRenderer = NULL;
-
-//Mouse button sprites
-SDL_Rect gSpriteClips[ BUTTON_SPRITE_TOTAL ];
-LTexture gButtonSpriteSheetTexture;
-
-//Buttons objects
-LButton gButtons[ TOTAL_BUTTONS ];
-
-LTexture::LTexture()
-{
-	//Initialize
-	mTexture = NULL;
-	mWidth = 0;
-	mHeight = 0;
-}
-
-LTexture::~LTexture()
-{
-	//Deallocate
-	free();
-}
-
-bool LTexture::loadFromFile( std::string path )
-{
-	//Get rid of preexisting texture
-	free();
-
-	//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
-
-		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-		if( newTexture == NULL )
-		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
-		else
-		{
-			//Get image dimensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	//Return success
-	mTexture = newTexture;
-	return mTexture != NULL;
-}
-
-#ifdef _SDL_TTF_H
-bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColor )
-{
-	//Get rid of preexisting texture
-	free();
-
-	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
-	if( textSurface == NULL )
-	{
-		printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
-	}
-	else
-	{
-		//Create texture from surface pixels
-        mTexture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
-		if( mTexture == NULL )
-		{
-			printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Get image dimensions
-			mWidth = textSurface->w;
-			mHeight = textSurface->h;
-		}
-
-		//Get rid of old surface
-		SDL_FreeSurface( textSurface );
-	}
-
-	//Return success
-	return mTexture != NULL;
-}
-#endif
-
-void LTexture::free()
-{
-	//Free texture if it exists
-	if( mTexture != NULL )
-	{
-		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
-	}
-}
-
-void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
-{
-	//Modulate texture rgb
-	SDL_SetTextureColorMod( mTexture, red, green, blue );
-}
-
-void LTexture::setBlendMode( SDL_BlendMode blending )
-{
-	//Set blending function
-	SDL_SetTextureBlendMode( mTexture, blending );
-}
-
-void LTexture::setAlpha( Uint8 alpha )
-{
-	//Modulate texture alpha
-	SDL_SetTextureAlphaMod( mTexture, alpha );
-}
-
-void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip )
-{
-	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-
-	//Set clip rendering dimensions
-	if( clip != NULL )
-	{
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
-	}
-
-	//Render to screen
-	SDL_RenderCopyEx( gRenderer, mTexture, clip, &renderQuad, angle, center, flip );
-}
-
-int LTexture::getWidth()
-{
-	return mWidth;
-}
-
-int LTexture::getHeight()
-{
-	return mHeight;
-}
-
-LButton::LButton()
-{
-	mPosition.x = 0;
-	mPosition.y = 0;
-
-	mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
-}
-
-void LButton::setPosition( int x, int y )
-{
-	mPosition.x = x;
-	mPosition.y = y;
-}
-
-void LButton::handleEvent( SDL_Event* e )
-{
-	//If mouse event happened
-	if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP )
-	{
-		//Get mouse position
-		int x, y;
-		SDL_GetMouseState( &x, &y );
-
-		//Check if mouse is in button
-		bool inside = true;
-
-		//Mouse is left of the button
-		if( x < mPosition.x )
-		{
-			inside = false;
-		}
-		//Mouse is right of the button
-		else if( x > mPosition.x + BUTTON_WIDTH )
-		{
-			inside = false;
-		}
-		//Mouse above the button
-		else if( y < mPosition.y )
-		{
-			inside = false;
-		}
-		//Mouse below the button
-		else if( y > mPosition.y + BUTTON_HEIGHT )
-		{
-			inside = false;
-		}
-
-		//Mouse is outside button
-		if( !inside )
-		{
-			mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
-		}
-		//Mouse is inside button
-		else
-		{
-			//Set mouse over sprite
-			switch( e->type )
-			{
-				case SDL_MOUSEMOTION:
-				mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-				break;
-
-				case SDL_MOUSEBUTTONDOWN:
-				mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-				break;
-
-				case SDL_MOUSEBUTTONUP:
-				mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-				break;
-			}
-		}
-	}
-}
-
-void LButton::render()
-{
-	//Show current button sprite
-	gButtonSpriteSheetTexture.render( mPosition.x, mPosition.y, &gSpriteClips[ mCurrentSprite ] );
-}
-
-bool init()
-{
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-	//Initialization flag
-	bool success = true;
-
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-		success = false;
-	}
-	else
-	{
-		//Set texture filtering to linear
-		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
-		{
-			printf( "Warning: Linear texture filtering not enabled!" );
-		}
-
-		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
-		{
-			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-			success = false;
-		}
-		else
-		{
-<<<<<<< HEAD
-			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
-=======
-			//Create vsynced renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-			if( gRenderer == NULL )
-			{
-				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-				success = false;
-			}
-			else
-			{
-				//Initialize renderer color
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
-				//Initialize PNG loading
-				int imgFlags = IMG_INIT_PNG;
-				if( !( IMG_Init( imgFlags ) & imgFlags ) )
-				{
-					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-					success = false;
-				}
-			}
-		}
-	}
-
-	return success;
-}
-
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-<<<<<<< HEAD
-	//Load PNG texture
-	gTexture = loadTexture( "texture.png" );
-	if( gTexture == NULL )
-	{
-		printf( "Failed to load texture image!\n" );
-		success = false;
-	}
-=======
-	//Load sprites
-	if( !gButtonSpriteSheetTexture.loadFromFile( "button.png" ) )
-	{
-		printf( "Failed to load button sprite texture!\n" );
-		success = false;
-	}
-	else
-	{
-		//Set sprites
-		for( int i = 0; i < BUTTON_SPRITE_TOTAL; ++i )
-		{
-			gSpriteClips[ i ].x = 0;
-			gSpriteClips[ i ].y = i * 200;
-			gSpriteClips[ i ].w = BUTTON_WIDTH;
-			gSpriteClips[ i ].h = BUTTON_HEIGHT;
-		}
-
-		//Set buttons in corners
-		gButtons[ 0 ].setPosition( 0, 0 );
-		gButtons[ 1 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, 0 );
-		gButtons[ 2 ].setPosition( 0, SCREEN_HEIGHT - BUTTON_HEIGHT );
-		gButtons[ 3 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, SCREEN_HEIGHT - BUTTON_HEIGHT );
-	}
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-
-	return success;
-}
-
-void close()
-{
-<<<<<<< HEAD
-	//Free loaded image
-	SDL_DestroyTexture( gTexture );
-	gTexture = NULL;
-=======
-	//Free loaded images
-	gButtonSpriteSheetTexture.free();
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-
-	//Destroy window
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
->>>>>>> be99687f831c29f896bbff77f39cf1821638bd39
-
-#define SCREEN_W 640 //tamanho da janela que sera criada
-#define SCREEN_H 480
-
-<<<<<<< HEAD
-int main(int argc, char** argv) //funcao de entrada
-{
-    SDL_Surface* screen; //superficie que representa a tela do computador
-    SDL_Event event; //um evento enviado pela SDL
-    int quit = 0; //devemos encerrar o programa?
-
-    SDL_Init(SDL_INIT_VIDEO); //inicializar a SDL
-    screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, 16, SDL_SWSURFACE); //criar uma janela 640x480x16bits
-
-    while(!quit) //rodar enquanto nao for para encerrar :)
-    {
-        while(SDL_PollEvent(&event)) //checar eventos
-        {
-            if(event.type == SDL_QUIT) //fechar a janela?
+            //Verifica se a imagem foi encontrada
+            if(TelaInicial==NULL || JoiaAzul==NULL || JoiaBranca==NULL)
             {
-                quit = 1; //sair do loop principal
+                std::cout<<"Alguma imagem não foi carregada corretamente, código do erro: " << SDL_GetError()<<std::endl;
+            }
+}
+
+
+void carregaVideo()
+{
+    //Inicia e Verifica se o vídeo é criado
+    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        SDL_Init(SDL_INIT_VIDEO);
+        std::cout << "Erro ao iniciar video! Codigo de erro: " << SDL_GetError() << std::endl;
+    }
+    else
+    {   //Inicia a janela
+        window = SDL_CreateWindow("Joinha", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+        //SDL_WINDOW_RESIZABLE redimenciona a janela, (maximiza, aumenta, diminui a tela...)
+
+        //Verifica se da erro ao criar janela
+        if(window == NULL)
+            std::cout << "Erro ao criar janela! Codigo de erro: " << SDL_GetError() << std::endl;
+        else
+        {
+            carregaImagens();
+        }
+    }
+}
+
+void geraMatriz(int matriz[lin][col])
+{
+        /* desenhar a Matriz */
+        SDL_Rect destino;
+        int linha, coluna, espSup = 100, espEsq = 300,r, recebe[7][7];
+
+        for (linha = 0; linha < 7; linha++)
+        {
+            destino.y =espSup + (linha * moveLin);
+                for (coluna = 0; coluna < 7; coluna++)
+                {
+                    destino.x = espEsq + (coluna * moveCol);
+                    SDL_BlitSurface(JoiaAzul, NULL, surface, &destino);
+                }
+        }
+}
+
+int main(int argc, char *argv[]){
+    srand(time(NULL));
+
+    //Colocação da tabela
+    int matriz[lin][col];
+
+    carregaVideo();
+
+    bool close = false;
+    //Enquanto a janela estiver executando faz..
+    while(!close){
+
+        //Enquanto não acontece nenhum evento (clique do mouse, teclado etc...) faz..
+        while(SDL_PollEvent(&Event) != 0){
+
+            if(Event.type == SDL_QUIT)
+                close = true;
+            if(Event.key.keysym.sym)
+            {
+                //Reconhece que um evento do teclado
+                switch(Event.key.keysym.sym)
+                {
+//                caso w seja apertado
+                case SDLK_w:
+                    break;
+
+                default:
+                    break;
+                }
+
+            }
+            switch(Event.type)
+            {
+                case SDL_MOUSEBUTTONUP: //é clicado
+
+                    switch(Event.button.button)
+                    {
+                        case SDL_BUTTON_LEFT:
+                            //Função Troca
+
+                            //Função Troca
+                            std::cout << "Botao esquerdo apertado" << std::endl;
+                            SDL_MOUSEMOTION; //é movido
+     	            std::cout   << "Has movido el ratón al punto ("
+                                << Event.motion.x
+                                << ","
+                                << Event.motion.y
+                                << ")."
+                                << std::endl;
+     	            	    break;
+
+                        default:
+
+     	 	                break;
+     	            }
+
             }
         }
-=======
-<<<<<<< HEAD
-SDL_Texture* loadTexture( std::string path )
-{
-	//The final texture
-	SDL_Texture* newTexture = NULL;
 
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-		if( newTexture == NULL )
-		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
+        //Inicio da funcao principal do jogo
 
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
+        //Exibe a imagem na tela
+        SDL_BlitSurface(TelaInicial, NULL, surface, NULL);
 
-	return newTexture;
-}
+            geraMatriz(matriz);
 
-=======
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-int main( int argc, char* args[] )
-{
-	//Start up SDL and create window
-	if( !init() )
-	{
-		printf( "Failed to initialize!\n" );
-	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
-			//Main loop flag
-			bool quit = false;
+        //Atualiza a janela
+        SDL_UpdateWindowSurface(window);
 
-			//Event handler
-			SDL_Event e;
-<<<<<<< HEAD
 
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-=======
+        // fim da funcao principal do jogo
 
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-
-					//Handle button events
-					for( int i = 0; i < TOTAL_BUTTONS; ++i )
-					{
-						gButtons[ i ].handleEvent( &e );
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
-					}
-				}
-
-				//Clear screen
-<<<<<<< HEAD
-				SDL_RenderClear( gRenderer );
-
-				//Render texture to screen
-				SDL_RenderCopy( gRenderer, gTexture, NULL, NULL );
-=======
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-
-				//Render buttons
-				for( int i = 0; i < TOTAL_BUTTONS; ++i )
-				{
-					gButtons[ i ].render();
-				}
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
->>>>>>> be99687f831c29f896bbff77f39cf1821638bd39
-
-        SDL_Flip(screen); //atualizar a tela
     }
 
-    SDL_Quit(); //encerrar a SDL
-
+    //Libera a memória, onde a janela está alocada
+    SDL_DestroyWindow(window);
+    //Fecha o SDL
+    SDL_Quit();
     return 0;
 }

@@ -1,27 +1,32 @@
 # depslib dependency file v1.0
-<<<<<<< HEAD
-1400880704 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
-=======
-<<<<<<< HEAD
 200259960 <<<<< HEAD
 
-1401271197 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
+1402046209 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
+	<iostream>
 	<SDL.h>
-	<stdio.h>
-=======
+	<SDL_image.h>
+	<cstdlib>
+	<ctime>
+
+1400880704 D
+
+1401271197 
+
 3871304 ÿÿÿÿ
 
-1401262908 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\17_mouse_events.cpp
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<string>
->>>>>>> 44e7105dd3c8983e999a6814599c09189486748f
+1401262908 7105dd3c8983e999a6814599c09189486748f
 
 1400879611 e241f499bcbeb7a6af3b1ae82a8b2269b91f3
->>>>>>> be99687f831c29f896bbff77f39cf1821638bd39
+
+1400879611 9687f831c29f896bbff77f39cf1821638bd39
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
+
+1401276375 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\testef1f1.cpp
+	<SDL.h>
+	<stdio.h>
+
+1402043239 source:c:\projetoedb_lp\teste sdl - nÂo abra ! warning !\teste\backup.c
 

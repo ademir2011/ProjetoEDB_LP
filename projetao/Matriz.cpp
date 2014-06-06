@@ -3,17 +3,23 @@
 #include <ctime>
 #include "Matriz.h"
 
-void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){        //funções bonus para cada tipo de localização na matriz
+Matriz::Matriz(){
+
+    Func_Geramatriz();
+    FuncExibe_matriz();
+}
+
+void inline Matriz::FuncBonus(int linha, int coluna){        //funções bonus para cada tipo de localização na m
 
     int i, j;
 
-    // ------------ Caso esteja no miolo da matriz
+    // ------------ Caso esteja no miolo da m
 
     if(linha >= 1 && linha < lin - 1 && coluna >= 1 && coluna < col - 1){
 
         for(i = (linha - 1); (i <= linha + 1); i++){
             for(j = (coluna - 1); j <= (coluna + 1); j++){
-                matriz[i][j] = 1;
+                m[i][j] = 1;
             }
         }
     }
@@ -27,7 +33,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         if (coluna > 0 && coluna < col - 1 ){
             for(i = linha; (i <= linha + 1); i++){
                 for(j = (coluna - 1); j <= (coluna + 1); j++){
-                    matriz[i][j] = 1;
+                    m[i][j] = 1;
                 }
             }
         }
@@ -37,7 +43,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         else if(coluna == 0){
             for(i = linha; (i <= linha + 1); i++){
                     for(j = coluna; j <= (coluna + 1); j++){
-                        matriz[i][j] = 1;
+                        m[i][j] = 1;
                     }
                 }
         }
@@ -47,7 +53,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         else if(coluna == col - 1){
             for(i = linha; (i <= linha + 1); i++){
                 for(j = (coluna - 1); j <= coluna; j++){
-                    matriz[i][j] = 1;
+                    m[i][j] = 1;
                 }
             }
         }
@@ -64,7 +70,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         if (coluna > 0 && coluna < col - 1){
             for(i = linha - 1; i <= linha; i++){
                 for(j = (coluna - 1); j <= (coluna + 1); j++){
-                    matriz[i][j] = 1;
+                    m[i][j] = 1;
                 }
             }
         }
@@ -74,7 +80,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         else if(coluna == 0){
             for(i = linha - 1; i <= linha; i++){
                 for(j = coluna; j <= (coluna + 1); j++){
-                    matriz[i][j] = 1;
+                    m[i][j] = 1;
                 }
             }
         }
@@ -84,7 +90,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
         else if(coluna == col - 1){
             for(i = (linha - 1); i <= linha; i++){
                 for(j = (coluna - 1); j <= coluna; j++){
-                    matriz[i][j] = 1;
+                    m[i][j] = 1;
                 }
             }
         }
@@ -99,7 +105,7 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
             if(coluna == 0){
                 for(i = linha - 1; i <= linha + 1; i++){
                     for(j = coluna; j <= (coluna + 1); j++){
-                        matriz[i][j] = 1;
+                        m[i][j] = 1;
                     }
                 }
             }
@@ -108,27 +114,27 @@ void inline Matriz::FuncBonus(int matriz[lin][col], int linha, int coluna){     
             else if(coluna == col - 1){
                 for(i = linha - 1; i <= linha + 1; i++){
                     for(j = coluna - 1; j <= coluna; j++){
-                        matriz[i][j] = 1;
+                        m[i][j] = 1;
                     }
                 }
             }
 
     }
 }
-/*
-void Matriz::FuncExibe_matriz(int matriz[lin][col]){
+
+void Matriz::FuncExibe_matriz(){
 
 for(int i=0;i<lin;i++)
     {
         for(int j=0;j<col;j++)
         {
-            std::cout << matriz[i][j] << "\t";
+            std::cout << m[i][j] << "\t";
         }
         std::cout << "\n";
     }
 }
 
-int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
+int Matriz::Func_Procura(int *repetidos, int *tipo, int *coord_linha, int *coord_coluna){
     int c1, c2, c3, c4, c5;                 //contadores para colunas
     int l = 0;                              //contador para linha
 
@@ -142,13 +148,13 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
             c5 = c4 + 1;
 
 
-                if(c1 < col && c2 < col && matriz[l][c1] == matriz[l][c2]){                                             //tem 2 *repetidos?
-                    if(c3 < col && matriz[l][c1] == matriz[l][c3]){                                                     //tem 3 *repetidos?
-                        if(c4 < col && matriz[l][c1] == matriz[l][c4]){                                                 //tem 4 *repetidos?
-                            if(c5 < col && matriz[l][c1] == matriz[l][c5]){                                             //tem 5 *repetidos?
+                if(c1 < col && c2 < col && m[l][c1] == m[l][c2]){                                             //tem 2 *repetidos?
+                    if(c3 < col && m[l][c1] == m[l][c3]){                                                     //tem 3 *repetidos?
+                        if(c4 < col && m[l][c1] == m[l][c4]){                                                 //tem 4 *repetidos?
+                            if(c5 < col && m[l][c1] == m[l][c5]){                                             //tem 5 *repetidos?
 
                                 if(l >= 0 && l < lin - 2){                                                              //T7 de cabeça pra cima
-                                    if(matriz[l][c3] == matriz[l + 1][c3] && matriz[l][c3] == matriz[l + 2][c3]){       //tamanho 7 *tipo 1
+                                    if(m[l][c3] == m[l + 1][c3] && m[l][c3] == m[l + 2][c3]){       //tamanho 7 *tipo 1
                 /* 7.1 */              {*repetidos = 7;
                                         *tipo = 1;                                                                       //7 *repetidos em T
                                         *coord_linha = l;                                                                //linha do elemento base
@@ -157,7 +163,7 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                     }
                                 }
                                 else if(l > 1 && l < lin){
-                                    if(matriz[l][c3] == matriz[l - 1][c3] && matriz[l][c3] == matriz[l - 2][c3]){       //tamanho 7 *tipo 2
+                                    if(m[l][c3] == m[l - 1][c3] && m[l][c3] == m[l - 2][c3]){       //tamanho 7 *tipo 2
                 /* 7.2 */              {*repetidos = 7;
                                         *tipo = 2;                                                                       //7 *repetidos em T(de cabeça para baixo)
                                         *coord_linha = l;
@@ -178,8 +184,8 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                             return 1;}                                                                                     //será excluido com a implementacao do return
                         }
                         if(l > 1 && l < lin - 2){                                                              //T7(*tipos 3 e 4)
-                            if(matriz[l][c1] == matriz[l - 1][c1] && matriz[l][c1] == matriz[l - 2][c1]
-                               && matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l + 2][c1]){       //Tamanho 7 *tipo 3(deitado - perna para esquerda)
+                            if(m[l][c1] == m[l - 1][c1] && m[l][c1] == m[l - 2][c1]
+                               && m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l + 2][c1]){       //Tamanho 7 *tipo 3(deitado - perna para esquerda)
                 /* 7.3 */      {*repetidos = 7;
                                 *tipo = 3;
                                 *coord_linha = l;                                                                //linha do elemento base
@@ -187,8 +193,8 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                 return 1;}                                                                         //será excluido com a implementacao do return
                             }
                         }
-                        if(matriz[l][c3] == matriz[l - 1][c3] && matriz[l][c3] == matriz[l - 2][c3]
-                           && matriz[l][c3] == matriz[l + 1][c3] && matriz[l][c3] == matriz[l + 2][c3]){
+                        if(m[l][c3] == m[l - 1][c3] && m[l][c3] == m[l - 2][c3]
+                           && m[l][c3] == m[l + 1][c3] && m[l][c3] == m[l + 2][c3]){
                 /* 7.4 */   {*repetidos = 7;
                             *tipo = 4;
                             *coord_linha = l;                                                                //linha do elemento base
@@ -196,14 +202,14 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                             return 1;}                                                                          //será excluido com a implementacao do return
                         }
                         if(l > 1 && l < lin){                                                                           //L de cabeça pra cima
-                            if(matriz[l][c1] == matriz[l - 1][c1] && matriz[l][c1] == matriz[l - 2][c1]){               //tamanho 5 *tipo 3
+                            if(m[l][c1] == m[l - 1][c1] && m[l][c1] == m[l - 2][c1]){               //tamanho 5 *tipo 3
                 /* 5.3 */      {*repetidos = 5;
                                 *tipo = 3;                                                                               //5 *repetidos em L
                                 *coord_linha = l;                                                                        //linha do elemento base
                                 *coord_coluna = c1;                                                                      //coluna do elemento base
                                 return 1;}                                                                                 //será excluido com a implementacao do return
                             }
-                            if(matriz[l][c3] == matriz[l - 1][c3] && matriz[l][c3] == matriz[l - 2][c3]){               //tamanho 5 *tipo 4
+                            if(m[l][c3] == m[l - 1][c3] && m[l][c3] == m[l - 2][c3]){               //tamanho 5 *tipo 4
                 /* 5.4 */       {*repetidos = 5;
                                 *tipo = 4;                                                                               //5 *repetidos em L(invertido horizontalmente)
                                 *coord_linha = l;                                                                        //linha do elemento base
@@ -211,7 +217,7 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                                                                         //coluna do elemento base
                                 return 1;}                                                                                 //será excluido com a implementacao do return
                             }
-                            if(matriz[l][c2] == matriz[l - 1][c2] && matriz[l][c2] == matriz[l - 2][c2]){               //tamanho 5 *tipo 4
+                            if(m[l][c2] == m[l - 1][c2] && m[l][c2] == m[l - 2][c2]){               //tamanho 5 *tipo 4
                 /* 5.8 */       {*repetidos = 5;
                                 *tipo = 8;                                                                               //5 *repetidos em L(invertido horizontalmente)
                                 *coord_linha = l;                                                                        //linha do elemento base
@@ -220,21 +226,21 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                             }
                         }
                         if(l < lin - 2 && l >= 0){                                                                 //L de cabeça pra baixo
-                            if(matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l + 2][c1]){               //tamanho 5 *tipo 5
+                            if(m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l + 2][c1]){               //tamanho 5 *tipo 5
                 /* 5.5 */      {*repetidos = 5;
                                 *tipo = 5;                                                                               //5 *repetidos em L(de cabeça para baixo)
                                 *coord_linha = l;                                                                        //linha do elemento base
                                 *coord_coluna = c1;                                                                       //coluna do elemento base
                                 return 1;}                                                                                 //será excluido com a implementacao do return
                             }
-                            if(matriz[l][c3] == matriz[l + 1][c3] && matriz[l][c3] == matriz[l + 2][c3]){               //tamanho 5 *tipo 6
+                            if(m[l][c3] == m[l + 1][c3] && m[l][c3] == m[l + 2][c3]){               //tamanho 5 *tipo 6
                 /* 5.6 */      {*repetidos = 5;
                                 *tipo = 6;                                                                               //5 *repetidos em L(de cabeça para baixo e invertido horizontalmente)
                                 *coord_linha = l;                                                                        //linha do elemento base
                                 *coord_coluna = c3;                                                                      //coluna do elemento base
                                 return 1;}                                                                                 //será excluido com a implementacao do return
                             }
-                            if(matriz[l][c2] == matriz[l + 1][c2] && matriz[l][c2] == matriz[l + 2][c2]){               //tamanho 5 *tipo 7
+                            if(m[l][c2] == m[l + 1][c2] && m[l][c2] == m[l + 2][c2]){               //tamanho 5 *tipo 7
                 /* 5.7 */      {*repetidos = 5;
                                 *tipo = 7;                                                                               //5 *repetidos em T
                                 *coord_linha = l;                                                                        //linha do elemento base
@@ -243,14 +249,14 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                             }
                         }
                         if(l > 0 && l < lin - 1){                                                                           //T5 (*tipo 9)
-                            if(matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l - 1][c1]){               //tamanho 5 *tipo 9
+                            if(m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l - 1][c1]){               //tamanho 5 *tipo 9
                 /* 5.9 */       {*repetidos = 5;
                                 *tipo = 9;                                                                               //5 *repetidos em T
                                 *coord_linha = l;                                                                        //linha do elemento base
                                 *coord_coluna = c1;                                                                      //coluna do elemento base
                                 return 1;}                                                                                  //será excluido com a implementacao do return
                             }
-                            else if(matriz[l][c3] == matriz[l - 1][c3] && matriz[l][c3] == matriz[l + 1][c3]){
+                            else if(m[l][c3] == m[l - 1][c3] && m[l][c3] == m[l + 1][c3]){
                 /* 5.10 */          {*repetidos = 5;
                                     *tipo = 10;                                                                               //5 *repetidos em T(cabeça para baixo)
                                     *coord_linha = l;                                                                        //linha do elemento base
@@ -265,8 +271,8 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                     return 1;}                                                                                         //será excluido com a implementacao do return
                     }
                 }
-        if(l < lin - 4 && matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l + 2][c1]
-        && matriz[l][c1] == matriz[l + 3][c1] && matriz[l][c1] == matriz[l + 4][c1]){
+        if(l < lin - 4 && m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l + 2][c1]
+        && m[l][c1] == m[l + 3][c1] && m[l][c1] == m[l + 4][c1]){
 
                      /* 5.2 */      *repetidos = 5;
                                     *tipo = 2;                                                                                       //3 *repetidos em linha
@@ -275,8 +281,8 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                     return 1;
         }
 
-        else if(l < lin - 3 && matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l + 2][c1]
-        && matriz[l][c1] == matriz[l + 3][c1]){
+        else if(l < lin - 3 && m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l + 2][c1]
+        && m[l][c1] == m[l + 3][c1]){
 
 
                     /* 4.2 */       *repetidos = 4;
@@ -286,7 +292,7 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
                                     return 1;
         }
 
-        else if(l < lin - 2 && matriz[l][c1] == matriz[l + 1][c1] && matriz[l][c1] == matriz[l + 2][c1]){
+        else if(l < lin - 2 && m[l][c1] == m[l + 1][c1] && m[l][c1] == m[l + 2][c1]){
                     /* 3.2 */       *repetidos = 3;
                                     *tipo = 2;                                                                                       //3 *repetidos em linha
                                     *coord_linha = l + 2;                                                                                //linha do elemento base
@@ -298,54 +304,54 @@ int Matriz::Func_Procura(int matriz[lin][col], int *repetidos, int *tipo, int *c
 return 0;
 }
 
-void Matriz::Func_Geramatriz(int matriz[lin][col]){
+void Matriz::Func_Geramatriz(){
     for(int i=0;i<lin;i++)
     {
         for(int j=0;j<col;j++)
         {
                 do
                 {
-                    matriz[i][j]=rand()% 3;
-                }while((matriz[i][j]==matriz[i][j-1] && matriz[i][j]==matriz[i][j-2]) ||
-                       (matriz[i][j]==matriz[i-1][j] && matriz[i][j]==matriz[i-2][j]));
+                    m[i][j]=rand()% 3;
+                }while((m[i][j]==m[i][j-1] && m[i][j]==m[i][j-2]) ||
+                       (m[i][j]==m[i-1][j] && m[i][j]==m[i-2][j]));
         }
     }
 }
 
-void Matriz::Func_Compara(int matriz[lin][col], int l1, int c1, int l2, int c2, int *esp_4_l, int *esp_4_c){
+void Matriz::Func_Compara(int l1, int c1, int l2, int c2, int *esp_4_l, int *esp_4_c){
     if( (l1==l2 && (c1==c2-1 || c1==c2+1)  || (c1==c2 && (l1==l2-1 || l1==l2+1)))   &&
             (
-               ((matriz[l1][c1]==matriz[l1][c1-1] && matriz[l1][c1]==matriz[l1][c1-2])      ||
-                (matriz[l1][c1]==matriz[l1][c1+1] && matriz[l1][c1]==matriz[l1][c1+2])      ||
-                (matriz[l1][c1]==matriz[l1+1][c1] && matriz[l1][c1]==matriz[l1+2][c1])      ||
-                (matriz[l1][c1]==matriz[l1-1][c1] && matriz[l1][c1]==matriz[l1-2][c1])      ||
-                (matriz[l1][c1]==matriz[l1+1][c1] && matriz[l1][c1]==matriz[l1-1][c1])      ||
-                (matriz[l1][c1]==matriz[l1][c1+1] && matriz[l1][c1]==matriz[l1][c1-1]))
+               ((m[l1][c1]==m[l1][c1-1] && m[l1][c1]==m[l1][c1-2])      ||
+                (m[l1][c1]==m[l1][c1+1] && m[l1][c1]==m[l1][c1+2])      ||
+                (m[l1][c1]==m[l1+1][c1] && m[l1][c1]==m[l1+2][c1])      ||
+                (m[l1][c1]==m[l1-1][c1] && m[l1][c1]==m[l1-2][c1])      ||
+                (m[l1][c1]==m[l1+1][c1] && m[l1][c1]==m[l1-1][c1])      ||
+                (m[l1][c1]==m[l1][c1+1] && m[l1][c1]==m[l1][c1-1]))
                                                   ||
-               ((matriz[l2][c2]==matriz[l2][c2-1] && matriz[l2][c2]==matriz[l2][c2-2])      ||
-                (matriz[l2][c2]==matriz[l2][c2+1] && matriz[l2][c2]==matriz[l2][c2+2])      ||
-                (matriz[l2][c2]==matriz[l2+1][c2] && matriz[l2][c2]==matriz[l2+2][c2])      ||
-                (matriz[l2][c2]==matriz[l2-1][c2] && matriz[l2][c2]==matriz[l2-2][c2])      ||
-                (matriz[l2][c2]==matriz[l2+1][c2] && matriz[l2][c2]==matriz[l2-1][c2])      ||
-                (matriz[l2][c2]==matriz[l2][c2+1] && matriz[l2][c2]==matriz[l2][c2-1]))
+               ((m[l2][c2]==m[l2][c2-1] && m[l2][c2]==m[l2][c2-2])      ||
+                (m[l2][c2]==m[l2][c2+1] && m[l2][c2]==m[l2][c2+2])      ||
+                (m[l2][c2]==m[l2+1][c2] && m[l2][c2]==m[l2+2][c2])      ||
+                (m[l2][c2]==m[l2-1][c2] && m[l2][c2]==m[l2-2][c2])      ||
+                (m[l2][c2]==m[l2+1][c2] && m[l2][c2]==m[l2-1][c2])      ||
+                (m[l2][c2]==m[l2][c2+1] && m[l2][c2]==m[l2][c2-1]))
             )
         )
     {
         if(
-               (matriz[l1][c1]==matriz[l1][c1-1] && matriz[l1][c1]==matriz[l1][c1+1] && matriz[l1][c1]==matriz[l1][c1+2]) ||
-               (matriz[l1][c1]==matriz[l1][c1-2] && matriz[l1][c1]==matriz[l1][c1-1] && matriz[l1][c1]==matriz[l1][c1+1]) ||
-               (matriz[l1][c1]==matriz[l1-1][c1] && matriz[l1][c1]==matriz[l1+1][c1] && matriz[l1][c1]==matriz[l1+2][c1]) ||
-               (matriz[l1][c1]==matriz[l1-2][c1] && matriz[l1][c1]==matriz[l1-1][c1] && matriz[l1][c1]==matriz[l1+1][c1])
+               (m[l1][c1]==m[l1][c1-1] && m[l1][c1]==m[l1][c1+1] && m[l1][c1]==m[l1][c1+2]) ||
+               (m[l1][c1]==m[l1][c1-2] && m[l1][c1]==m[l1][c1-1] && m[l1][c1]==m[l1][c1+1]) ||
+               (m[l1][c1]==m[l1-1][c1] && m[l1][c1]==m[l1+1][c1] && m[l1][c1]==m[l1+2][c1]) ||
+               (m[l1][c1]==m[l1-2][c1] && m[l1][c1]==m[l1-1][c1] && m[l1][c1]==m[l1+1][c1])
           )
         {
             *esp_4_l=l1;
             *esp_4_c=c1;
         }
         if(
-                   (matriz[l2][c2]==matriz[l2][c2-1] && matriz[l2][c2]==matriz[l2][c2+1] && matriz[l2][c2]==matriz[l2][c2+2]) ||
-                   (matriz[l2][c2]==matriz[l2][c2-2] && matriz[l2][c2]==matriz[l2][c2-1] && matriz[l2][c2]==matriz[l2][c2+1]) ||
-                   (matriz[l2][c2]==matriz[l2-1][c2] && matriz[l2][c2]==matriz[l2+1][c2] && matriz[l2][c2]==matriz[l2+2][c2]) ||
-                   (matriz[l2][c2]==matriz[l2-2][c2] && matriz[l2][c2]==matriz[l2-1][c2] && matriz[l2][c2]==matriz[l2+1][c2])
+                   (m[l2][c2]==m[l2][c2-1] && m[l2][c2]==m[l2][c2+1] && m[l2][c2]==m[l2][c2+2]) ||
+                   (m[l2][c2]==m[l2][c2-2] && m[l2][c2]==m[l2][c2-1] && m[l2][c2]==m[l2][c2+1]) ||
+                   (m[l2][c2]==m[l2-1][c2] && m[l2][c2]==m[l2+1][c2] && m[l2][c2]==m[l2+2][c2]) ||
+                   (m[l2][c2]==m[l2-2][c2] && m[l2][c2]==m[l2-1][c2] && m[l2][c2]==m[l2+1][c2])
                )
         {
             *esp_4_l=l2;
@@ -360,15 +366,15 @@ void Matriz::Func_Compara(int matriz[lin][col], int l1, int c1, int l2, int c2, 
     }
 }
 
-void Matriz::Func_Troca(int matriz[lin][col], int l1, int c1, int l2, int c2){
+void Matriz::Func_Troca(int l1, int c1, int l2, int c2){
     int aux;
 
-    aux=matriz[l1][c1];
-    matriz[l1][c1]=matriz[l2][c2];
-    matriz[l2][c2]=aux;
+    aux=m[l1][c1];
+    m[l1][c1]=m[l2][c2];
+    m[l2][c2]=aux;
 }
 
-void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
+void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
     switch(repetidos)
     {
             case 3:
@@ -382,11 +388,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                             {
                                   if((i - 1)>= 0)
                                   {
-                                        matriz[i][j]= matriz[i - 1][j];
+                                        m[i][j]= m[i - 1][j];
                                   }
                                   else
                                   {
-                                        matriz[i][j]= 400;//400;
+                                        m[i][j]= rand()%3;//rand()%3;
                                   }
                             }
                     }
@@ -398,18 +404,18 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                         {
                               if((i - repetidos)>=0)
                               {
-                                    matriz[i][j]= matriz[i - repetidos][j];
+                                    m[i][j]= m[i - repetidos][j];
                               }
                               else
                               {
-                                    matriz[i][j]= 400;
+                                    m[i][j]= rand()%3;
                               }
                         }
                  }break;
 
             case 4:
                   //linha com bônus
-                  matriz[l][c] = 100;
+                  m[l][c] = 100;
                   if(tipo == 1)
                   {
                        for(int j = (c + 1);j <= (c + (repetidos - 1)); j++)
@@ -418,11 +424,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                 {
                                       if((i - 1)>= 0)
                                       {
-                                            matriz[i][j]= matriz[i - 1][j];
+                                            m[i][j]= m[i - 1][j];
                                       }
                                       else
                                       {
-                                            matriz[i][j]= 400;
+                                            m[i][j]= rand()%3;
                                       }
                                 }
                         }
@@ -434,17 +440,17 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                         {
                               if((i - (repetidos - 1))>=0)
                               {
-                                    matriz[i][j]= matriz[i - (repetidos - 1)][j];
+                                    m[i][j]= m[i - (repetidos - 1)][j];
                               }
                               else
                               {
-                                    matriz[i][j]= 400;
+                                    m[i][j]= rand()%3;
                               }
                         }
                   }break;
 
             case 5:
-                 matriz[l][c] = 100;
+                 m[l][c] = 100;
                  switch(tipo)
                  {
                          case 1:
@@ -455,11 +461,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                         {
                                                 if((i - 1)>= 0)
                                                 {
-                                                      matriz[i][j]== matriz[i - 1][j];
+                                                      m[i][j]== m[i - 1][j];
                                                 }
                                                 else
                                                 {
-                                                      matriz[i][j]== 400;
+                                                      m[i][j]== rand()%3;
                                                 }
                                         }
                               }
@@ -470,11 +476,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                       {
                                               if((i - 1)>= 0)
                                               {
-                                                    matriz[i][j]== matriz[i - 1][j];
+                                                    m[i][j]== m[i - 1][j];
                                               }
                                               else
                                               {
-                                                    matriz[i][j]== 400;
+                                                    m[i][j]== rand()%3;
                                               }
                                       }
                               }break;
@@ -484,36 +490,36 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                               {
                                          if((i - 2)>=0)
                                          {
-                                               matriz[i][j]= matriz[i - 2][j];
+                                               m[i][j]= m[i - 2][j];
                                          }
                                          else
                                          {
-                                               matriz[i][j]= 400;
+                                               m[i][j]= rand()%3;
                                          }
                               }
                               for(int i = (l + 1),j = c;i >= 0;i--)
                               {
                                          if((i - 2)>=0)
                                          {
-                                               matriz[i][j]= matriz[i - 2][j];
+                                               m[i][j]= m[i - 2][j];
                                          }
                                          else
                                          {
-                                               matriz[i][j]= 400;
+                                               m[i][j]= rand()%3;
                                          }
                               }break;
 
-                         case 3:
+                         /*case 3:
                              //coluna
                              for(int i = (l - 1),j = c;i >= 0;i--)
                              {
                                    if((i - 2)>=0)
                                    {
-                                         matriz[i][j]= matriz[i - 2][j];
+                                         m[i][j]= m[i - 2][j];
                                    }
                                    else
                                    {
-                                         matriz[i][j]= 400;
+                                         m[i][j]= rand()%3;
                                    }
                              }
                              //linha direita
@@ -523,11 +529,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -538,11 +544,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                    if((i - 2)>=0)
                                    {
-                                         matriz[i][j]= matriz[i - 2][j];
+                                         m[i][j]= m[i - 2][j];
                                    }
                                    else
                                    {
-                                         matriz[i][j]= 400;
+                                         m[i][j]= rand()%3;
                                    }
                              }
                              //linha esquerda
@@ -552,11 +558,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -567,11 +573,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                    if((i - 2)>=0)
                                    {
-                                         matriz[i][j]= matriz[i - 2][j];
+                                         m[i][j]= m[i - 2][j];
                                    }
                                    else
                                    {
-                                         matriz[i][j]= 400;
+                                         m[i][j]= rand()%3;
                                    }
                              }
                              //linha direita
@@ -581,11 +587,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -596,11 +602,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                    if((i - 2)>=0)
                                    {
-                                         matriz[i][j]= matriz[i - 2][j];
+                                         m[i][j]= m[i - 2][j];
                                    }
                                    else
                                    {
-                                         matriz[i][j]= 400;
+                                         m[i][j]= rand()%3;
                                    }
                              }
                              //linha esquerda
@@ -610,11 +616,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -625,11 +631,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -639,11 +645,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }
@@ -654,11 +660,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -669,11 +675,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -683,11 +689,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }
@@ -698,11 +704,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -713,22 +719,22 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 1)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 1][j];
+                                           m[i][j]= m[i - 1][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              for(int i = l,j = c;i >= 0;i--)
                              {
                                      if((i - 1)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 1][j];
+                                           m[i][j]= m[i - 1][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha direita
@@ -738,11 +744,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -752,22 +758,22 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 1)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 1][j];
+                                           m[i][j]= m[i - 1][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              for(int i = l,j = c;i >= 0;i--)
                              {
                                      if((i - 1)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 1][j];
+                                           m[i][j]= m[i - 1][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -777,18 +783,18 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
                  }break;
 
             case 7:
-                 matriz[l][c] = 100;
+                 m[l][c] = 100;
                  switch(tipo)
                  {
                          case 1:
@@ -797,11 +803,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -811,11 +817,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }
@@ -826,11 +832,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -841,11 +847,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -855,11 +861,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }
@@ -870,11 +876,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -885,22 +891,22 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              for(int i = (l + 1),j = c;i >= 0;i--)
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha direita
@@ -910,11 +916,11 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
                              }break;
@@ -925,22 +931,22 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              for(int i = (l + 1),j = c;i >= 0;i--)
                              {
                                      if((i - 2)>=0)
                                      {
-                                           matriz[i][j]= matriz[i - 2][j];
+                                           m[i][j]= m[i - 2][j];
                                      }
                                      else
                                      {
-                                           matriz[i][j]= 400;
+                                           m[i][j]= rand()%3;
                                      }
                              }
                              //linha esquerda
@@ -950,14 +956,14 @@ void Func_Desloca(int matriz[lin][col], int repetidos, int tipo, int l, int c){
                                      {
                                              if((i - 1)>= 0)
                                              {
-                                                   matriz[i][j]== matriz[i - 1][j];
+                                                   m[i][j]== m[i - 1][j];
                                              }
                                              else
                                              {
-                                                   matriz[i][j]== 400;
+                                                   m[i][j]== rand()%3;
                                              }
                                      }
-                             }break;
+                             }break;*/
 
                  }break;
 

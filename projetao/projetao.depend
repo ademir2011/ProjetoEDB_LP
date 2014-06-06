@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1402095257 source:c:\projetoedb_lp\projetao\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"Matriz.h"
+
+1402095282 c:\projetoedb_lp\projetao\matriz.h
+
+1402095536 source:c:\projetoedb_lp\projetao\matriz.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"Matriz.h"
+

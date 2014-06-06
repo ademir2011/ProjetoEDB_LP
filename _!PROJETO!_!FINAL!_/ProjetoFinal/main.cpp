@@ -30,7 +30,7 @@ void carregaImagens()
             surface = SDL_GetWindowSurface(window);
 
             //Carrega a imagem em imd
-            TelaInicial = IMG_Load("imagens/Plano2.jpg");
+            TelaInicial = IMG_Load("imagens/P2.jpg");
 
             //Carregando jóia 1
             JoiaAzul = IMG_Load("imagens/Azul1.png");
@@ -77,36 +77,52 @@ void carregaVideo()
 
 void geraMatriz()
 {
-    int random;
+    int matriz[lin][col];
+
         /* desenhar a Matriz */
         SDL_Rect destino;
-        int linha, coluna, espSup = 100, espEsq = 300,r;
+        int linha, coluna, espSup = 100, espEsq = 300;
 
         for (linha = 0; linha < 7; linha++)
         {
-            destino.y =espSup + (linha * moveLin);
+            destino.y = espSup + (linha * moveLin);
                 for (coluna = 0; coluna < 7; coluna++)
                 {
                     destino.x = espEsq + (coluna * moveCol);
-                    random = rand()%4;
-                    if(random==0)
+                    if(matriz[linha][coluna]==0)
                     {
                         SDL_BlitSurface(JoiaBranca, NULL, surface, &destino);
                     }
-                    else if(random==1)
+                    else if(matriz[linha][coluna]==1)
                     {
                         SDL_BlitSurface(JoiaAzul, NULL, surface, &destino);
                     }
-                    else if(random==2)
+                    else if(matriz[linha][coluna]==2)
                     {
                         SDL_BlitSurface(JoiaLaranja, NULL, surface, &destino);
                     }
-                    else if(random==3)
+                    else if(matriz[linha][coluna]==3)
                     {
                         SDL_BlitSurface(JoiaVerde, NULL, surface, &destino);
                     }
 
                 }
+        }
+}
+
+void geraValoresMatriz()
+{
+    int matriz[lin][col];
+    for(int i=0;i<lin;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                    do
+                    {
+                        matriz[i][j]=rand()%4;
+                    }while((matriz[i][j]==matriz[i][j-1] && matriz[i][j]==matriz[i][j-2]) ||
+                           (matriz[i][j]==matriz[i-1][j] && matriz[i][j]==matriz[i-2][j]));
+            }
         }
 }
 
@@ -161,6 +177,7 @@ void Eventos()
 int main(int argc, char *argv[]){
     srand(time(NULL));
 
+    geraValoresMatriz();
     carregaVideo();
 
     bool close = false;

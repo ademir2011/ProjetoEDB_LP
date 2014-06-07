@@ -4,7 +4,6 @@
 #include "Matriz.h"
 #include "Jogo.h"
 
-#define tam 10
 
 using namespace std;
 
@@ -36,11 +35,7 @@ void Jogo::menu(){
                 if (l1 == 10){
                     Jogo();
                 }
-                cin >> l1 >> l2 >> c2;
-                if (l1 == 10){
-                    Jogo();
-                }
-                else{
+                cin >> c1 >> l2 >> c2;
 
                 matriz.Func_Troca(l1,c1,l2,c2);
                 matriz.Func_Compara(l1,c1,l2,c2,&l_4,&c_4);
@@ -55,7 +50,8 @@ void Jogo::menu(){
                 matriz.Func_Desloca(repetidos, tipo, l_base, c_base);
 
                 matriz.FuncExibe_matriz();
-                }
+                matriz.Func_Print_Pontos();
+
             }
         }break;
         case 2:

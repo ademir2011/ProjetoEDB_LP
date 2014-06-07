@@ -3,6 +3,7 @@
 #include <ctime>
 #include "Matriz.h"
 
+using namespace std;
 
 
 Matriz::Matriz(){
@@ -381,6 +382,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
     {
             case 3:
                 //linha sem bônus
+                pontos = 100;
                 if(tipo == 1)
                 {
                     for(int j = c;j <= (c + 2); j++)
@@ -417,10 +419,10 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
 
             case 4:
                   //linha com bônus
-                  m[l][c] = 100;
+                  pontos  = 150;
                   if(tipo == 1)
                   {
-                       for(int j = (c + 1);j <= (c + (repetidos - 1)); j++)
+                       for(int j = c;j <= (c + (repetidos)); j++)
                         {
                                 for(int i = l;i >= 0;i--)
                                 {
@@ -438,11 +440,11 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
                   else
                   {
                         //coluna com bônus
-                        for(int i = (l - 1),j = c;i >= 0;i--)
+                        for(int i = l,j = c;i >= 0;i--)
                         {
-                              if((i - (repetidos - 1))>=0)
+                              if((i - repetidos)>=0)
                               {
-                                    m[i][j]= m[i - (repetidos - 1)][j];
+                                    m[i][j]= m[i - repetidos][j];
                               }
                               else
                               {
@@ -452,6 +454,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
                   }break;
 
             case 5:
+                pontos = 200;
                  m[l][c] = 100;
                  switch(tipo)
                  {
@@ -971,4 +974,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
 
     }
 
+}
+void Matriz::Func_Print_Pontos(){
+    cout<<"Sua pontuacao é:"<<pontos<<"\n";
 }

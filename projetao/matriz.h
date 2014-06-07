@@ -6,7 +6,7 @@
 
 class Matriz
 {
-private:
+
       int pontos;
       int joia;
       int m[lin][col];
@@ -20,5 +20,6 @@ public:
        void Func_Troca(int l1, int c1, int l2, int c2);
        void Func_Desloca(int repetidos, int tipo, int l, int c);
        void Func_Compara(int l1, int c1, int l2, int c2, int *esp_4_l, int *esp_4_c);
+       void Func_Print_Pontos();
 };
 #endif _MATRIZ_H_

@@ -1,16 +1,21 @@
-#ifndef _MATRIZ_H_
-#define _MATRIZ_H_
+#ifndef _JOGO_H_
+#define _JOGO_H_
 
 #define tam 10
 
 class Jogo
 {
-    int score;
-    int vet[tam]
+public:
+    int vet_r[tam];
     Matriz m;
-}
+
+    Jogo();
+    void menu();
+    void recordes();
+
+};
 
 
 
 
-#endif _MATRIZ_H_
+#endif _JOGO_H_

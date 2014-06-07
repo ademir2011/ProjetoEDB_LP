@@ -3,10 +3,11 @@
 #include <ctime>
 #include "Matriz.h"
 
+
+
 Matriz::Matriz(){
 
     Func_Geramatriz();
-    FuncExibe_matriz();
 }
 
 void inline Matriz::FuncBonus(int linha, int coluna){        //funções bonus para cada tipo de localização na m

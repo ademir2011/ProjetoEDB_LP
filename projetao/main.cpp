@@ -2,11 +2,11 @@
 #include <cstdlib>
 #include <ctime>
 #include "Matriz.h"
-
+#include "Jogo.h"
 int main()
 {
-
-    int i, j, cont;
+    Jogo Bej;
+    /*int i, j, cont;
     int l_4, c_4;
     int repetidos, tipo, l_base, c_base;
 
@@ -32,7 +32,7 @@ int main()
         matriz.Func_Desloca(repetidos, tipo, l_base, c_base);
 
         matriz.FuncExibe_matriz();
-}
+}*/
 
 return 0;
 }

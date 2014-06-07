@@ -7,6 +7,7 @@
 class Matriz
 {
 private:
+      int pontos;
       int joia;
       int m[lin][col];
 

@@ -7,7 +7,7 @@ using namespace std;
 
 
 Matriz::Matriz(){
-
+    pontos = 0;
     Func_Geramatriz();
 }
 
@@ -382,7 +382,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
     {
             case 3:
                 //linha sem bônus
-                pontos = 100;
+                pontos += 10;
                 if(tipo == 1)
                 {
                     for(int j = c;j <= (c + 2); j++)
@@ -419,7 +419,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
 
             case 4:
                   //linha com bônus
-                  pontos  = 150;
+                  pontos  += 15;
                   if(tipo == 1)
                   {
                        for(int j = c;j <= (c + (repetidos)); j++)
@@ -454,7 +454,7 @@ void Matriz::Func_Desloca(int repetidos, int tipo, int l, int c){
                   }break;
 
             case 5:
-                pontos = 200;
+                pontos += 20;
                  m[l][c] = 100;
                  switch(tipo)
                  {

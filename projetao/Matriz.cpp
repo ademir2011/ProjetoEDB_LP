@@ -363,6 +363,7 @@ void Matriz::Func_Compara(int l1, int c1, int l2, int c2, int *esp_4_l, int *esp
     else
     {
         std::cout<<"Nao trocou !!!\n\n-------------------\n\n";
+        Func_Troca(l1, c1, l2, c2);
     }
 }
 

@@ -8,42 +8,66 @@
 #define col 7
 #define moveLin 66
 #define moveCol 65
+#define Botoes 5
 
+int x,y;
 int matriz[lin][col];
+int face=0;
+int soma=45;
+int autoriza=0;
 
 using std::cout;
 using std::cin;
 using std::endl;
 
+    SDL_Event Event;
     SDL_Window *window = NULL;
     SDL_Surface *surface = NULL;
-    SDL_Event Event;
-    SDL_Surface *TelaInicial = NULL;
-    SDL_Surface *TelaSec = NULL;
+    SDL_Surface *surface2 = NULL;
     SDL_Surface *JoiaAzul = NULL;
     SDL_Surface *JoiaBranca = NULL;
     SDL_Surface *JoiaVerde = NULL;
     SDL_Surface *JoiaLaranja = NULL;
-    SDL_Surface *matrizTeste = NULL;
+
+    SDL_Surface *TelaInicial = NULL;
+    SDL_Surface *Menu = NULL;
+    SDL_Surface *Jogo = NULL;
+    SDL_Surface *Gameover = NULL;
+
+    SDL_Surface *logo;                          //LOGO
+    SDL_Rect posicaologo;
+
+    SDL_Surface *bt[5];                    //Botoes
+
+    SDL_Rect posicaoBt[5];
 
 void carregaImagens()
 {
             //Passa a janela para dentro da surface
             surface = SDL_GetWindowSurface(window);
 
-            //Carrega a imagem em imd
-            TelaInicial = SDL_LoadBMP("imagens/planops.bmp");
+            //surface2 = SDL_GetWindowsSurface(window);
 
-            //Carregando jóia 1
+            //Telas
+            TelaInicial = SDL_LoadBMP("imagens/telaInicial.bmp");
+            Menu = SDL_LoadBMP("imagens/menu.bmp");
+            Jogo = SDL_LoadBMP("imagens/planops.bmp");
+           // Gameover = SDL_LoadBMP("imagens/planops.bmp");
+
+            //Logo
+            logo = SDL_LoadBMP("logo.png");
+
+            //Botoes
+            bt[0] = IMG_Load("imagens/bt1.png");
+            bt[1] = IMG_Load("imagens/bt2.png");
+            bt[2] = IMG_Load("imagens/bt3.png");
+            bt[3] = IMG_Load("imagens/bt4.png");
+            bt[4] = IMG_Load("imagens/bt5.png");
+
+            //Joias
             JoiaAzul = IMG_Load("imagens/Azul1.png");
-
-            //Carregando jóia 2
             JoiaBranca = IMG_Load("imagens/Branco.png");
-
-            //Carregando jóia 1
             JoiaVerde = IMG_Load("imagens/Verde.png");
-
-            //Carregando jóia 2
             JoiaLaranja = IMG_Load("imagens/Laranja.png");
 
             //Verifica se a imagem foi encontrada
@@ -52,8 +76,6 @@ void carregaImagens()
                 cout<<"Alguma imagem não foi carregada corretamente, código do erro: " << SDL_GetError();
             }
 }
-
-
 void carregaVideo()
 {
     //Inicia e Verifica se o vídeo é criado
@@ -76,7 +98,6 @@ void carregaVideo()
         }
     }
 }
-
 void geraMatriz()
 {
         /* desenhar a Matriz */
@@ -110,7 +131,6 @@ void geraMatriz()
                 }
         }
 }
-
 void geraValoresMatriz()
 {
     for(int i=0;i<lin;i++)
@@ -130,46 +150,118 @@ void Eventos()
 {
      bool close = false;
     //Enquanto não acontece nenhum evento (clique do mouse, teclado etc...) faz..
-        while(SDL_PollEvent(&Event) != 0){
+        while(SDL_PollEvent(&Event) != 0)
+        {
 
             if(Event.type == SDL_QUIT)
                 close = true;
-            if(Event.key.keysym.sym)
+
+            switch(face)
             {
-                //Reconhece que um evento do teclado
-                switch(Event.key.keysym.sym)
-                {
-                //caso w seja apertado
-                case SDLK_w:
+                case 0:
+                    SDL_BlitSurface(TelaInicial, NULL, surface, NULL);
+
+                        x = Event.button.x;
+                        y = Event.button.y;
+
+                        posicaoBt[0].x=600;
+                        posicaoBt[0].y=500;
+
+                        SDL_BlitSurface(bt[0], NULL, surface, &posicaoBt[0]);
+
+                        if(Event.button.button == SDL_BUTTON_LEFT)
+                        {
+                            if(x >= posicaoBt[0].x && x <= posicaoBt[0].x + posicaoBt[0].w && y >= posicaoBt[0].y && y <= posicaoBt[0].y + posicaoBt[0].h)
+                            {
+                                face=1;
+                            }
+                        }
+
+                    break;
+
+                //Menu
+                case 1:
+                    SDL_BlitSurface(Menu, NULL, surface, NULL);
+
+                    x = Event.button.x;
+                    y = Event.button.y;
+
+                    //Exibe o menu de imagens na tela
+                    for(int d=0;d<Botoes;d++)
+                    {
+                        posicaoBt[d].x=350;
+                        posicaoBt[d].y=300+(45*d);
+
+                        SDL_BlitSurface(bt[d], NULL, surface, &posicaoBt[d]);
+                    }
+
+                    if(Event.button.button == SDL_BUTTON_LEFT)
+                    {
+                        if(x >= posicaoBt[0].x && x <= posicaoBt[0].x + posicaoBt[0].w && y >= posicaoBt[0].y && y <= posicaoBt[0].y + posicaoBt[0].h)
+                        {
+                            face=2;
+                        }
+
+                        if(x >= posicaoBt[4].x && x <= posicaoBt[4].x + posicaoBt[4].w && y >= posicaoBt[4].y && y <= posicaoBt[4].y + posicaoBt[4].h)
+                        {
+                            face=0;
+                        }
+                    }
+
+                    break;
+
+                //Jogo
+                case 2:
+                    autoriza=1;
+                    SDL_BlitSurface(Jogo, NULL, surface, NULL);
+
+                    x = Event.button.x;
+                    y = Event.button.y;
+
+                    posicaoBt[4].x=45;
+                    posicaoBt[4].y=500;
+
+                    SDL_BlitSurface(bt[4], NULL, surface, &posicaoBt[4]);
+
+                    if(Event.button.button == SDL_BUTTON_LEFT)
+                    {
+                        if(x >= posicaoBt[4].x && x <= posicaoBt[4].x + posicaoBt[4].w && y >= posicaoBt[4].y && y <= posicaoBt[4].y + posicaoBt[4].h)
+                        {
+                            face=0;
+                            autoriza=0;
+                        }
+                    }
+
+                    break;
+
+                case 3:
                     break;
 
                 default:
                     break;
-                }
 
-            }
-            switch(Event.type)
-            {
-                case SDL_MOUSEBUTTONUP: //é clicado
+                switch(Event.type)
+                {
+                    case SDL_MOUSEBUTTONDOWN: //é clicado
 
-                    switch(Event.button.button)
-                    {
-                        case SDL_BUTTON_LEFT:
+                        if(SDL_BUTTON_LEFT)
+                        {
                             //Função Troca
 
                             //Função Troca
-                            cout << "Botao esquerdo apertado";
-                            SDL_MOUSEMOTION; //é movido
+                            cout << "Botao esquerdo apertado\n";
                             cout << "Has movido el ratón al punto ("
                                  << Event.motion.x
                                  << ","
                                  << Event.motion.y
-                                 << ").";
-     	            	    break;
+                                 << ").\n";
+                        }
+                        break;
 
                         default:
-     	 	                break;
-     	            }
+                            break;
+                }
+
             }
         }
 }
@@ -190,11 +282,12 @@ int main(int argc, char *argv[]){
 
         //--------------------------------------Inicio da funcao principal do jogo-------------------------
 
-        //Exibe a imagem na tela
-        SDL_BlitSurface(TelaInicial, NULL, surface, NULL);
-
-            //Gera a matriz de imagens randomicas
+            if(autoriza==1)
+            {
+                   //Gera a matriz de imagens randomicas
             geraMatriz();
+            }
+
 
         //Atualiza a janela
         SDL_UpdateWindowSurface(window);
@@ -202,6 +295,7 @@ int main(int argc, char *argv[]){
         //--------------------------------------Fim da funcao principal do jogo----------------------------
     }
 
+    SDL_FreeSurface(TelaInicial);
     //Libera a memória, onde a janela está alocada
     SDL_DestroyWindow(window);
     //Fecha o SDL
